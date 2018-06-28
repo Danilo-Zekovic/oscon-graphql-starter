@@ -5,7 +5,11 @@ import { find, filter } from 'lodash';
 import { makeExecutableSchema } from 'graphql-tools';
 import http from 'http'
 
-// Fake data
+// init express app and http server
+var app = express();
+const server = http.createServer(app)
+
+// Fake database ====
 const authors = [
   { id: 1, firstName: 'Tom', middle: 'William',lastName: 'Coleman' },
   { id: 2, firstName: 'Sashko', middle: 'Lester', lastName: 'Stubailo' },
@@ -20,15 +24,54 @@ const posts = [
   { id: 5, authorId: 1, title: 'Get Started with Apollo'},
 ];
 
-// TODO: GraphQL queries schemas...
+// ====
 
+const typeDefs = `
+  type Author {
+    id: Int!
+    firstName: String
+    middle: String
+    lastName: String
+    posts: [Post]
+  }
 
+  type Post {
+    id: Int!
+    title: String
+    author: Author
+  }
 
-var app = express();
-const server = http.createServer(app)
+  type Query {
+    posts: [Post]
+    authors: [Author]
+    author(id: Int!): Author
+  }
+`;
 
-// TODO: app use GraphQL
+const resolvers = {
+  Query: {
+    posts: () => posts,
+    authors: () => authors,
+    author: (_, args) => find(authors, { id: args.id }),
+  },
+  Author: {
+    posts: (author) => filter(posts, { authorId: author.id }),
+  },
+  Post: {
+    author: (post) => find(authors, { id: post.authorId }),
+  },
+};
 
+export const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
+
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: global,
+  graphiql: true,
+}));
 
 server.listen(4000);
 console.log(
