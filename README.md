@@ -8,7 +8,7 @@ Brian Capouch
 Danilo Zekovic    
 
 ## Branches:    
-   
-1. intro - starting branch for learning fundamentals    
-2. intro-final - final version of introduction coding    
+
+1. intro - Starting branch    
+2. intro-final - Final version of introductory code    
 3. hello - GraphQL Hello World     
