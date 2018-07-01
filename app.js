@@ -112,7 +112,7 @@ const resolvers = {
       let thisTitle = input["title"]
       let thisArticleType = input["articleType"]
       let thisAuthor = input["authorId"]
-      
+
       let newPost = {id: id, title: thisTitle, authorId: thisAuthor, articleType: thisArticleType}
       posts.push(newPost)
       return newPost
@@ -128,13 +128,16 @@ const resolvers = {
     represents: (agent) => filter(authors, { agent: agent})
   },
 		Person: {
-    __resolveType(data, context, info) {
-		  if (data.agent) {
-        return 'Author'
-      } else {
-        return 'Agent'
+      // This code differentiates between the two implementations of Person
+      // It is required because objects returned from the "people" query
+      //    must be defined types, not interface types
+      __resolveType(data, context, info) {
+  		  if (data.agent) {
+          return 'Author'
+        } else {
+          return 'Agent'
+        }
       }
-    }
   },
 };
 
