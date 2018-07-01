@@ -45,7 +45,7 @@ const typeDefs =
     OPINION
     REVIEW
     ANALYSIS
-	  TECHNICAL
+    TECHNICAL
 	}
 
 	type Author implements Person {
@@ -67,9 +67,9 @@ const typeDefs =
     lastName: String
     // Field unique to this implemented type
     represents: [Author]
-	}
+  }
 
-	type Post {
+  type Post {
     id: Int!
     title: String
     author: Author
@@ -85,12 +85,13 @@ const typeDefs =
     agent(id: Int!): Agent
   }
 
-	input PostInput {
+  input PostInput {
     title: String
     authorId: Int
     articleType: PostType
 }
-	type Mutation {
+
+type Mutation {
     createPost(input: PostInput): Post
   }
 `;
