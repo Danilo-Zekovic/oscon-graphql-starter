@@ -104,10 +104,15 @@ const resolvers = {
   Mutation: {
     createPost: (_, {input}) => {
       // Build new post object from input values
+
+      // "id" is sequential index into "posts" array
       let id = posts.length + 1
+
+      // Extract values from input data
       let thisTitle = input["title"]
       let thisArticleType = input["articleType"]
       let thisAuthor = input["authorId"]
+      
       let newPost = {id: id, title: thisTitle, authorId: thisAuthor, articleType: thisArticleType}
       posts.push(newPost)
       return newPost
