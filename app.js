@@ -53,7 +53,10 @@ const typeDefs =
 		firstName: String
 		middleInitial: String
 		lastName: String
+
+    // Fields unique to the implemented type
     posts: [Post]
+    // This is a derived field
 		agent: Agent
   }
 
@@ -62,6 +65,7 @@ const typeDefs =
 		firstName: String
 	  middleInitial: String
     lastName: String
+    // Field unique to this implemented type
 		represents: [Author]
 	}
 
