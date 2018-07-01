@@ -30,30 +30,31 @@ const posts = [
 
 // ====
 
-const typeDefs = `
+const typeDefs =
+`
   interface Person {
-    id: ID!
+		id: ID!
     firstName: String
-    middleInitial: String
-    lastName: String
+		middleInitial: String
+	  lastName: String
   }
 
-  enum PostType {
-    NEWS
-    SPORTS
-    OPINION
-    REVIEW
-    ANALYSIS
-    TECHNICAL
-  }
+	enum PostType {
+		NEWS
+		SPORTS
+  	OPINION
+  	REVIEW
+  	ANALYSIS
+		TECHNICAL
+	}
 
-  type Author implements Person {
+	type Author implements Person {
     id: ID!
-    firstName: String
-    middleInitial: String
-    lastName: String
+		firstName: String
+		middleInitial: String
+		lastName: String
     posts: [Post]
-    agent: Agent
+		agent: Agent
   }
 
   type Agent implements Person {
@@ -80,6 +81,15 @@ const typeDefs = `
     author(id: Int!): Author
 		agent(id: Int!): Agent
   }
+
+	input PostInput {
+		title: String
+		authorId: Int
+		articleType: PostType
+}
+	type Mutation {
+    createPost(input: PostInput): Post
+  }
 `;
 
 const resolvers = {
@@ -90,6 +100,20 @@ const resolvers = {
     people: () => authors.concat(agents),
     agent: (_, args) => find(agents,{ id: args.id }),
     author: (_, args) => find(authors, { id: args.id }),
+  },
+  Mutation: {
+    createPost: (_, {input}) => {
+      // Input contains the input values, but they have been converted to lowercase!!
+      // However, if you try to reference the properties by the all-lower keys, it fails
+      let id = posts.length + 1
+      let thisTitle = input["title"]
+      let thisArticleType = input["articleType"]
+      let thisAuthor = input["authorId"]
+      let newPost = {id: id, title: thisTitle, authorId: thisAuthor, articleType: thisArticleType}
+      posts.push(newPost)
+      console.log(posts.length)
+      return newPost
+    },
   },
   Author: {
     posts: (author) => filter(posts, { authorId: author.id }),
