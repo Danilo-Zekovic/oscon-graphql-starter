@@ -39,7 +39,7 @@ const typeDefs =
     lastName: String
   }
 
-	enum PostType {
+  enum PostType {
     NEWS
     SPORTS
     OPINION
@@ -91,9 +91,9 @@ const typeDefs =
     articleType: PostType
 }
 
-type Mutation {
-    createPost(input: PostInput): Post
-  }
+  type Mutation {
+      createPost(input: PostInput): Post
+    }
 `;
 
 const resolvers = {
