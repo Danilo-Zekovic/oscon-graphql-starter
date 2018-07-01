@@ -48,7 +48,7 @@ const typeDefs =
     TECHNICAL
 	}
 
-	type Author implements Person {
+  type Author implements Person {
     id: ID!
     firstName: String
     middleInitial: String
