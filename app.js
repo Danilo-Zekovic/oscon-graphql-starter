@@ -111,7 +111,6 @@ const resolvers = {
       let thisAuthor = input["authorId"]
       let newPost = {id: id, title: thisTitle, authorId: thisAuthor, articleType: thisArticleType}
       posts.push(newPost)
-      console.log(posts.length)
       return newPost
     },
   },
