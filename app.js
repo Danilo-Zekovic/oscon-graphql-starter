@@ -103,8 +103,7 @@ const resolvers = {
   },
   Mutation: {
     createPost: (_, {input}) => {
-      // Input contains the input values, but they have been converted to lowercase!!
-      // However, if you try to reference the properties by the all-lower keys, it fails
+      // Build new post object from input values
       let id = posts.length + 1
       let thisTitle = input["title"]
       let thisArticleType = input["articleType"]
