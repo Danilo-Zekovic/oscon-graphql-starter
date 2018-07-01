@@ -33,63 +33,62 @@ const posts = [
 const typeDefs =
 `
   interface Person {
-		id: ID!
+    id: ID!
     firstName: String
-		middleInitial: String
-	  lastName: String
+    middleInitial: String
+    lastName: String
   }
 
 	enum PostType {
-		NEWS
-		SPORTS
-  	OPINION
-  	REVIEW
-  	ANALYSIS
-		TECHNICAL
+    NEWS
+    SPORTS
+    OPINION
+    REVIEW
+    ANALYSIS
+	  TECHNICAL
 	}
 
 	type Author implements Person {
     id: ID!
-		firstName: String
-		middleInitial: String
-		lastName: String
+    firstName: String
+    middleInitial: String
+    lastName: String
 
     // Fields unique to the implemented type
     posts: [Post]
     // This is a derived field
-		agent: Agent
+    agent: Agent
   }
 
   type Agent implements Person {
     id: ID!
-		firstName: String
-	  middleInitial: String
+    firstName: String
+    middleInitial: String
     lastName: String
     // Field unique to this implemented type
-		represents: [Author]
+    represents: [Author]
 	}
 
 	type Post {
     id: Int!
     title: String
     author: Author
-		articleType: PostType
-
+    articleType: PostType
   }
 
   type Query {
     posts: [Post]
     authors: [Author]
-		agents: [Agent]
-		people: [Person]
+    agents: [Agent]
+    people: [Person]
     author(id: Int!): Author
-		agent(id: Int!): Agent
+    agent(id: Int!): Agent
   }
 
 	input PostInput {
-		title: String
-		authorId: Int
-		articleType: PostType
+    title: String
+    authorId: Int
+    articleType: PostType
 }
 	type Mutation {
     createPost(input: PostInput): Post
