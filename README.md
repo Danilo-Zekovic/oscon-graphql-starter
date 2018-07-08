@@ -11,8 +11,8 @@ Danilo Zekovic
 
 1. intro - Starting branch    
 2. intro-one - basic queries and types
-3. intro-two -
-4. intro-three -
-5. intro-four -
+3. intro-two - enums
+4. intro-three - interfaces
+5. intro-four - mutations 
 2. intro-final - Final version of introductory code    
 3. hello - GraphQL Hello World     
