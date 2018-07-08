@@ -84,16 +84,6 @@ const typeDefs =
     author(id: Int!): Author
     agent(id: Int!): Agent
   }
-
-  input PostInput {
-    title: String
-    authorId: Int
-    articleType: PostType
-}
-
-  type Mutation {
-      createPost(input: PostInput): Post
-    }
 `;
 
 const resolvers = {
@@ -104,23 +94,6 @@ const resolvers = {
     people: () => authors.concat(agents),
     agent: (_, args) => find(agents,{ id: args.id }),
     author: (_, args) => find(authors, { id: args.id }),
-  },
-  Mutation: {
-    createPost: (_, {input}) => {
-      // Build new post object from input values
-
-      // "id" is sequential index into "posts" array
-      let id = posts.length + 1
-
-      // Extract values from input data
-      let thisTitle = input["title"]
-      let thisArticleType = input["articleType"]
-      let thisAuthor = input["authorId"]
-
-      let newPost = {id: id, title: thisTitle, authorId: thisAuthor, articleType: thisArticleType}
-      posts.push(newPost)
-      return newPost
-    },
   },
   Author: {
     posts: (author) => filter(posts, { authorId: author.id }),
