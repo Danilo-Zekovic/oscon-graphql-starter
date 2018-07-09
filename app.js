@@ -3,17 +3,14 @@ import graphqlHTTP from 'express-graphql'
 import { buildSchema, execute, subscribe } from 'graphql'
 import { find, filter } from 'lodash';
 import { makeExecutableSchema } from 'graphql-tools';
-import {
-  graphqlExpress,
-  graphiqlExpress,
-} from 'graphql-server-express';
+import { graphiqlExpress } from 'graphql-server-express';
 import { createServer } from 'http'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { PubSub } from 'graphql-subscriptions'
 
-// Set up data structures for subscription fulfillment
-const pubsub = new PubSub(); //create a PubSub instance
-const POST_ADDED_TOPIC = 'postAdded';
+// Set up data structures for subscription management
+const pubsub = new PubSub()
+const POST_ADDED_TOPIC = 'postAdded'
 
 // We'll serve on port 4000
 const PORT = 4000
@@ -110,7 +107,7 @@ const typeDefs =
 
   # The subscription root type, specifying what we can subscribe to
   type Subscription {
-      postAdded: Post    # subscription operation.
+      postAdded: Post
   }
 `;
 
@@ -123,6 +120,7 @@ const resolvers = {
     agent: (_, args) => find(agents,{ id: args.id }),
     author: (_, args) => find(authors, { id: args.id }),
   },
+
   Mutation: {
     createPost: (_, {input}) => {
       // Build new post object from input values
@@ -141,11 +139,13 @@ const resolvers = {
       return newPost
       },
     },
+
   Subscription: {
     postAdded: {  // create a postAdded subscription resolver function.
       subscribe: () => pubsub.asyncIterator(POST_ADDED_TOPIC)  // subscribe to new posts
     }
   },
+
   Author: {
     posts: (author) => filter(posts, { authorId: author.id }),
   },
@@ -169,6 +169,7 @@ const resolvers = {
   },
 }
 
+// Create the schema object used below
 export const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
@@ -185,12 +186,12 @@ app.use('/graphiql', graphiqlExpress({
   subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions` // subscriptions endpoint.
 }));
 
-// Wrap the express server.
+// Wrap the express server in order to honor subscriptions
 const ws = createServer(app);
 ws.listen(PORT, () => {
   console.log(`GraphQL Server is now running on http://localhost:${PORT}`);
 
-  // Set up the WebSocket for handling GraphQL subscriptions.
+  // Set up the WebSocket for handling graphQL subscriptions.
   new SubscriptionServer({
     execute,
     subscribe,
