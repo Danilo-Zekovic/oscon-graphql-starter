@@ -1,9 +1,9 @@
 # oscon-graphql-starter
 Code for the OSCON 2018 Fundamentals Of GraphQL tutorial
 
-# Intro   
+# Subscriptions branch  
 
-Final version of introduction 
+Demonstrate the graphQL subscription model 
 
 ## Running the app
 

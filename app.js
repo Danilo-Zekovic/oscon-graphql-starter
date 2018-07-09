@@ -185,7 +185,7 @@ app.use('/graphql', graphqlHTTP({
 // Use subscription-aware wrapper around graphiQL
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
-  subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions` // subscriptions endpoint.
+  subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions`
 }));
 
 // Wrap the express server in order to honor subscriptions
@@ -198,7 +198,7 @@ ws.listen(PORT, () => {
     execute,
     subscribe,
     schema
-  }, {
+    }, {
     server: ws,
     path: '/subscriptions',
   })
