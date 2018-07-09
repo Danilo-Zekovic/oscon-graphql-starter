@@ -2,8 +2,8 @@ import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import { buildSchema, execute, subscribe } from 'graphql'
 import { find, filter } from 'lodash';
-import { makeExecutableSchema } from 'graphql-tools';
-import { graphiqlExpress } from 'graphql-server-express';
+import { makeExecutableSchema } from 'graphql-tools'
+import { graphiqlExpress } from 'graphql-server-express'
 import { createServer } from 'http'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { PubSub } from 'graphql-subscriptions'
@@ -16,7 +16,7 @@ const POST_ADDED_TOPIC = 'postAdded'
 const PORT = 4000
 
 // init express app and http server
-var app = express();
+var app = express()
 // const server = http.createServer(app)
 
 // Fake database ====
@@ -29,14 +29,14 @@ const authors = [
   { id: 1, firstName: 'Tom', middleInitial: 'W',lastName: 'Coleman', agent: find(agents,{id: 1})},
   { id: 2, firstName: 'Sashko', middleInitial: 'L', lastName: 'Stubailo', agent: find(agents,{id: 2})},
   { id: 3, firstName: 'Mikhail', middleInitial: 'R', lastName: 'Novikov', agent: find(agents, {id: 1}) },
-];
+]
 
 const posts = [
   { id: 1, authorId: 1, title: 'Introduction to GraphQL',articleType: 'REVIEW' },
   { id: 2, authorId: 2, title: 'GraphQL Rocks', articleType:  'OPINION' },
   { id: 3, authorId: 2, title: 'Advanced GraphQL', articleType: 'TECHNICAL' },
   { id: 4, authorId: 3, title: 'Launchpad is Cool', articleType: 'OPINION' },
-];
+]
 
 // ====
 
@@ -109,7 +109,7 @@ const typeDefs =
   type Subscription {
       postAdded: Post
   }
-`;
+`
 
 const resolvers = {
   Query: {
@@ -135,13 +135,14 @@ const resolvers = {
 
       let newPost = {id: id, title: thisTitle, authorId: thisAuthor, articleType: thisArticleType}
       posts.push(newPost)
+      // Notify subscribers
       pubsub.publish(POST_ADDED_TOPIC, { postAdded: newPost });  // publish to a topic
       return newPost
       },
     },
 
   Subscription: {
-    postAdded: {  // create a postAdded subscription resolver function.
+    postAdded: {
       subscribe: () => pubsub.asyncIterator(POST_ADDED_TOPIC)  // subscribe to new posts
     }
   },
@@ -173,23 +174,24 @@ const resolvers = {
 export const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
-});
+})
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: global,
   graphiql: true,
-}));
+}))
 
+// Use subscription-aware wrapper around graphiQL
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
   subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions` // subscriptions endpoint.
 }));
 
 // Wrap the express server in order to honor subscriptions
-const ws = createServer(app);
+const ws = createServer(app)
 ws.listen(PORT, () => {
-  console.log(`GraphQL Server is now running on http://localhost:${PORT}`);
+  console.log(`GraphQL Server is now running on http://localhost:${PORT}`)
 
   // Set up the WebSocket for handling graphQL subscriptions.
   new SubscriptionServer({
@@ -199,5 +201,5 @@ ws.listen(PORT, () => {
   }, {
     server: ws,
     path: '/subscriptions',
-  });
-});
+  })
+})
