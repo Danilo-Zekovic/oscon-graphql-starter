@@ -1,13 +1,26 @@
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
-import { buildSchema } from 'graphql'
+import { buildSchema, execute, subscribe } from 'graphql'
 import { find, filter } from 'lodash';
 import { makeExecutableSchema } from 'graphql-tools';
-import http from 'http'
+import {
+  graphqlExpress,
+  graphiqlExpress,
+} from 'graphql-server-express';
+import { createServer } from 'http'
+import { SubscriptionServer } from 'subscriptions-transport-ws'
+import { PubSub } from 'graphql-subscriptions'
+
+// Set up data structures for subscription fulfillment
+const pubsub = new PubSub(); //create a PubSub instance
+const POST_ADDED_TOPIC = 'postAdded';
+
+// We'll serve on port 4000
+const PORT = 4000
 
 // init express app and http server
 var app = express();
-const server = http.createServer(app)
+// const server = http.createServer(app)
 
 // Fake database ====
 const agents = [
@@ -76,6 +89,12 @@ const typeDefs =
     articleType: PostType
   }
 
+  input PostInput {
+    title: String
+    authorId: Int
+    articleType: PostType
+  }
+
   type Query {
     posts: [Post]
     authors: [Author]
@@ -85,15 +104,14 @@ const typeDefs =
     agent(id: Int!): Agent
   }
 
-  input PostInput {
-    title: String
-    authorId: Int
-    articleType: PostType
-}
-
   type Mutation {
       createPost(input: PostInput): Post
     }
+
+  # The subscription root type, specifying what we can subscribe to
+  type Subscription {
+      postAdded: Post    # subscription operation.
+  }
 `;
 
 const resolvers = {
@@ -119,8 +137,14 @@ const resolvers = {
 
       let newPost = {id: id, title: thisTitle, authorId: thisAuthor, articleType: thisArticleType}
       posts.push(newPost)
+      pubsub.publish(POST_ADDED_TOPIC, { postAdded: newPost });  // publish to a topic
       return newPost
+      },
     },
+  Subscription: {
+    postAdded: {  // create a postAdded subscription resolver function.
+      subscribe: () => pubsub.asyncIterator(POST_ADDED_TOPIC)  // subscribe to new posts
+    }
   },
   Author: {
     posts: (author) => filter(posts, { authorId: author.id }),
@@ -131,19 +155,19 @@ const resolvers = {
   Agent: {
     represents: (agent) => filter(authors, { agent: agent})
   },
-		Person: {
-      // This code differentiates between the two implementations of Person
-      // It is required because objects returned from the "people" query
-      //    must be defined types, not interface types
-      __resolveType(data, context, info) {
-  		  if (data.agent) {
-          return 'Author'
-        } else {
-          return 'Agent'
-        }
+	Person: {
+    // This code differentiates between the two implementations of Person
+    // It is required because objects returned from the "people" query
+    //    must be defined types, not interface types
+    __resolveType(data, context, info) {
+		  if (data.agent) {
+        return 'Author'
+      } else {
+        return 'Agent'
       }
+    }
   },
-};
+}
 
 export const schema = makeExecutableSchema({
   typeDefs,
@@ -156,8 +180,23 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
 }));
 
-server.listen(4000);
-console.log(
-  'Express server listening on port %d in %s mode',
-  server.address().port, app.settings.env
-)
+app.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql',
+  subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions` // subscriptions endpoint.
+}));
+
+// Wrap the express server.
+const ws = createServer(app);
+ws.listen(PORT, () => {
+  console.log(`GraphQL Server is now running on http://localhost:${PORT}`);
+
+  // Set up the WebSocket for handling GraphQL subscriptions.
+  new SubscriptionServer({
+    execute,
+    subscribe,
+    schema
+  }, {
+    server: ws,
+    path: '/subscriptions',
+  });
+});
