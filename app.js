@@ -160,7 +160,6 @@ export const schema = makeExecutableSchema({
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: global,
   graphiql: true,
 }))
 
