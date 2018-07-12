@@ -1,7 +1,7 @@
 {
   "name": "oscon-graphql-starter",
   "version": "1.0.0",
-  "description": "Intro branch, Express server with fake data",
+  "description": "Intro branch, Express server with mock data",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -17,7 +17,7 @@
     "JavaScript",
     "GraphiQL"
   ],
-  "author": "Danilo Zekovic",
+  "author": "Brian Capouch, Danilo Zekovic",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Danilo-Zekovic/oscon-graphql-starter/issues"
