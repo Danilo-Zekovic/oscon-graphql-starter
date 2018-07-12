@@ -1,9 +1,7 @@
 # oscon-graphql-starter
 Code for the OSCON 2018 Fundamentals Of GraphQL tutorial
 
-# Intro   
-
-Final version of introduction 
+# Intro One   
 
 ## Running the app
 
