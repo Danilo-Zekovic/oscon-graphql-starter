@@ -3,8 +3,10 @@ import graphqlHTTP from 'express-graphql'
 import { buildSchema, execute, subscribe } from 'graphql'
 import { find, filter } from 'lodash';
 import { makeExecutableSchema } from 'graphql-tools'
-import { graphiqlExpress } from 'graphql-server-express'
 import { createServer } from 'http'
+
+// These imports support the subscription functionality
+import { graphiqlExpress } from 'graphql-server-express'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { PubSub } from 'graphql-subscriptions'
 
