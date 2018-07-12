@@ -19,7 +19,7 @@ const PORT = 4000
 
 // init express app and http server
 var app = express()
-// const server = http.createServer(app)
+
 
 // Bring in our mock data
 import { agents, authors, posts } from "./data"
