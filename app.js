@@ -9,7 +9,7 @@ import http from 'http'
 var app = express();
 const server = http.createServer(app)
 
-// Fake database ====
+// "Mock" data ====
 const agents = [
   { id: 1, firstName: 'Larry', middleInitial: 'L', lastName: 'Thomas'},
   { id: 2, firstName: 'Bill', middleInitial: 'R', lastName: 'Lewis' }
@@ -125,7 +125,6 @@ export const schema = makeExecutableSchema({
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: global,
   graphiql: true,
 }));
 
