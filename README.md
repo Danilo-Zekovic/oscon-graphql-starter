@@ -9,9 +9,10 @@ Danilo Zekovic
 
 ## Branches:    
 
-1. intro - Starting branch    
-2. intro-one - basic queries and types
-3. intro-two - enums
-4. intro-three - interfaces
-5. intro-final - Final version of introductory code (mutations)   
-6. hello - GraphQL Hello World     
+1. intro - Starting branch
+2. intro-hello - GraphQL Hello World    
+3. intro-one - basic queries and types
+4. intro-two - enums
+5. intro-three - interfaces
+6. intro-four - mutations
+6. final - subscriptions   
