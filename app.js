@@ -53,7 +53,7 @@ const typeDefs =
   }
 
   type Post {
-    id: Int!
+    id: ID!
     title: String
     author: Author
     articleType: PostType
