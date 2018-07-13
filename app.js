@@ -12,8 +12,6 @@ const server = http.createServer(app)
 // Get our mock data
 import { authors, agents, posts } from './data'
 
-// ====
-
 const typeDefs =
 `
   type Author {
