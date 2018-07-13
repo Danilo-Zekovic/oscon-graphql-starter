@@ -1,5 +1,5 @@
 import { find } from 'lodash'
-import { authors, posts } from './data'
+import { authors, posts, agents } from './data'
 
 const resolvers = {
   Query: {

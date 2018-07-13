@@ -7,6 +7,7 @@ import http from 'http'
 
 // Get data
 import { authors, posts } from "./data"
+import { resolvers } from './resolvers'
 
 // Get resolvers
 import { resolvers } from './resolvers'
