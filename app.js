@@ -11,6 +11,8 @@ const server = http.createServer(app)
 
 // Get mock data
 import { authors, agents, posts } from "./data"
+import { resolvers } from './resolvers'
+
 const typeDefs =
 `
   interface Person {
@@ -66,38 +68,6 @@ const typeDefs =
     agent(id: Int!): Agent
   }
 `;
-
-const resolvers = {
-  Query: {
-    posts: () => posts,
-    authors: () => authors,
-    agents: () => agents,
-    people: () => authors.concat(agents),
-    agent: (_, args) => find(agents,{ id: args.id }),
-    author: (_, args) => find(authors, { id: args.id }),
-  },
-  Author: {
-    posts: (author) => filter(posts, { authorId: author.id }),
-  },
-  Post: {
-    author: (post) => find(authors, { id: post.authorId }),
-  },
-  Agent: {
-    represents: (agent) => filter(authors, { agent: agent})
-  },
-		Person: {
-      // This code differentiates between the two implementations of Person
-      // It is required because objects returned from the "people" query
-      //    must be defined types, not interface types
-      __resolveType(data, context, info) {
-  		  if (data.agent) {
-          return 'Author'
-        } else {
-          return 'Agent'
-        }
-      }
-  },
-};
 
 export const schema = makeExecutableSchema({
   typeDefs,
