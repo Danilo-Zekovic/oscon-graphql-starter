@@ -12,6 +12,9 @@ const server = http.createServer(app)
 // Get our mock data
 import { authors, posts } from './data'
 
+// Get resolvers
+import { resolvers } from './resolvers'
+
 const typeDefs =
 `
   type Author {
@@ -36,6 +39,7 @@ const typeDefs =
   }
 `;
 
+/*
 const resolvers = {
   Query: {
     posts: () => posts,
@@ -49,6 +53,7 @@ const resolvers = {
     author: (post) => find(authors, { id: post.authorId }),
   },
 };
+*/
 
 // Compile schema
 export const schema = makeExecutableSchema({
