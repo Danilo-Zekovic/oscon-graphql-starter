@@ -8,12 +8,13 @@ import { createServer } from 'http'
 // These imports support the subscription functionality
 import { graphiqlExpress } from 'graphql-server-express'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
+/*
 import { PubSub } from 'graphql-subscriptions'
 
 // Set up data structures for subscription management
 const pubsub = new PubSub()
 const POST_ADDED_TOPIC = 'postAdded'
-
+*/
 // We'll serve on port 4000
 const PORT = 4000
 
@@ -92,7 +93,7 @@ const typeDefs =
       createPost(input: PostInput): Post
     }
 
-  # The subscription type 
+  # The subscription type
   # Specifies possible pub-sub events
   type Subscription {
       postAdded: Post

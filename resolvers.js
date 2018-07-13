@@ -1,6 +1,14 @@
 import { find } from 'lodash'
 import { authors, posts, agents } from './data'
 
+// For subscription processing
+import { PubSub } from 'graphql-subscriptions'
+
+// Set up data structures for subscription management
+const pubsub = new PubSub()
+const POST_ADDED_TOPIC = 'postAdded'
+
+
 const resolvers = {
   Query: {
     posts: () => posts,
