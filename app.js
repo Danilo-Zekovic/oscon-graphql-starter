@@ -11,6 +11,8 @@ const server = http.createServer(app)
 
 // Get mock data
 import { authors, agents, posts } from "./data"
+
+// Get resolvers from file
 import { resolvers } from './resolvers'
 
 const typeDefs =
