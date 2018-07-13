@@ -6,7 +6,10 @@ import { makeExecutableSchema } from 'graphql-tools';
 import http from 'http'
 
 // Get data
-import { authors, agents, posts } from "./data"
+import { authors, posts } from "./data"
+
+// Get resolvers
+import { resolvers } from './resolvers'
 
 // init express app and http server
 var app = express();
