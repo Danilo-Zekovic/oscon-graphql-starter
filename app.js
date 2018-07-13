@@ -92,7 +92,7 @@ const typeDefs =
       createPost(input: PostInput): Post
     }
 
-  # The subscription root type, specifying what we can subscribe to
+  # The subscription type, specifying possible pub-sub events
   type Subscription {
       postAdded: Post
   }
