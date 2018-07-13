@@ -10,7 +10,7 @@ var app = express();
 const server = http.createServer(app)
 
 // Get our mock data
-import { authors, agents, posts } from './data'
+import { authors, posts } from './data'
 
 const typeDefs =
 `
