@@ -59,6 +59,7 @@ const resolvers = {
     // It is required because objects returned from the "people" query
     //    must be defined types, not interface types
     __resolveType(data, context, info) {
+      console.log("Info contains: " + JSON.stringify(info))
 		  if (data.agent) {
         return 'Author'
       } else {
