@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/Danilo-Zekovic/oscon-graphql-starter#readme",
   "dependencies": {
+    "apollo-cache-inmemory": "^1.2.5",
+    "apollo-client": "^2.3.5",
+    "apollo-link-http": "^1.5.4",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
     "graphql": "^0.13.2",
@@ -31,6 +34,8 @@
     "graphql-subscriptions": "^0.5.8",
     "graphql-tools": "^3.0.4",
     "lodash": "^4.17.10",
+    "react-apollo": "^2.1.9",
+    "react-router-dom": "^4.3.1",
     "subscriptions-transport-ws": "^0.9.12"
   },
   "devDependencies": {
