@@ -1,7 +1,7 @@
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import { buildSchema, execute, subscribe } from 'graphql'
-import { find, filter } from 'lodash';
+import { find, filter } from 'lodash'
 import { makeExecutableSchema } from 'graphql-tools'
 import { createServer } from 'http'
 
@@ -108,7 +108,7 @@ app.use('/graphql', graphqlHTTP({
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
   subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions`
-}));
+}))
 
 // Wrap the express server in order to honor subscriptions
 const ws = createServer(app)
