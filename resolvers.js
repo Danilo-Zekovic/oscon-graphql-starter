@@ -1,4 +1,4 @@
-import { find } from 'lodash'
+import { find,filter } from 'lodash'
 import { authors, posts, agents } from './data'
 
 const resolvers = {
