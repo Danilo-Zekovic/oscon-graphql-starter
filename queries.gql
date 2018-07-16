@@ -1,0 +1,35 @@
+{
+  posts {
+    title
+    author {
+      lastName
+    }
+  }
+}
+
+{
+  authors {
+    lastName
+    posts {
+      title
+    }
+  }
+}
+
+{
+  author(id: 3) {
+    firstName
+    middleInitial
+    lastName
+  }
+}
+
+{
+post(id: 2) {
+  title
+  articleType
+  author {
+    lastName
+    }
+  }
+}
