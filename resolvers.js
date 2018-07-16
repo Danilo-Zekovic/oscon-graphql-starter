@@ -31,6 +31,6 @@ const resolvers = {
         }
       }
   },
-};
+}
 
 export { resolvers }
