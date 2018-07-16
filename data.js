@@ -17,6 +17,6 @@ const posts = [
   { id: 2, authorId: 2, title: 'GraphQL Rocks', articleType:  'OPINION' },
   { id: 3, authorId: 2, title: 'Advanced GraphQL', articleType: 'TECHNICAL' },
   { id: 4, authorId: 3, title: 'Launchpad is Cool', articleType: 'OPINION' },
-];
+]
 
 export { agents, authors, posts }
