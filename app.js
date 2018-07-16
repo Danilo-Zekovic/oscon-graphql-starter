@@ -11,9 +11,6 @@ import { authors, posts } from "./data"
 // Get resolvers
 import { resolvers } from './resolvers'
 
-// Get resolvers
-import { resolvers } from './resolvers'
-
 // init express app and http server
 var app = express();
 const server = http.createServer(app)
@@ -46,25 +43,12 @@ const typeDefs =
 
   type Query {
     posts: [Post]
+    post(id: Int!): Post
     authors: [Author]
     author(id: Int!): Author
   }
 
-`;
-
-const resolvers = {
-  Query: {
-    posts: () => posts,
-    authors: () => authors,
-    author: (_, args) => find(authors, { id: args.id }),
-  },
-  Author: {
-    posts: (author) => filter(posts, { authorId: author.id }),
-  },
-  Post: {
-    author: (post) => find(authors, { id: post.authorId }),
-  },
-};
+`
 
 export const schema = makeExecutableSchema({
   typeDefs,
