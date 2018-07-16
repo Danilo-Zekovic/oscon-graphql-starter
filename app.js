@@ -12,18 +12,11 @@ const server = http.createServer(app)
 // Get mock data
 import { authors, agents, posts } from "./data"
 
-// Get resolvers 
+// Get resolvers
 import { resolvers } from './resolvers'
 
 const typeDefs =
 `
-  interface Person {
-    id: ID!
-    firstName: String
-    middleInitial: String
-    lastName: String
-  }
-
   enum PostType {
     NEWS
     SPORTS
@@ -33,19 +26,17 @@ const typeDefs =
     TECHNICAL
 	}
 
-  type Author implements Person {
+  type Author {
     id: ID!
     firstName: String
     middleInitial: String
     lastName: String
-
-    # Fields unique to the implemented type
     posts: [Post]
     # This is a derived field
     agent: Agent
   }
 
-  type Agent implements Person {
+  type Agent {
     id: ID!
     firstName: String
     middleInitial: String
@@ -53,6 +44,8 @@ const typeDefs =
     # Field unique to this implemented type
     represents: [Author]
   }
+
+  union People = Author | Agent
 
   type Post {
     id: ID!
@@ -65,7 +58,7 @@ const typeDefs =
     posts: [Post]
     authors: [Author]
     agents: [Agent]
-    people: [Person]
+    people: [People]
     author(id: Int!): Author
     agent(id: Int!): Agent
   }
