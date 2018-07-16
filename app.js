@@ -1,7 +1,7 @@
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import { buildSchema, execute, subscribe } from 'graphql'
-import { find, filter } from 'lodash';
+import { find, filter } from 'lodash'
 import { createServer } from 'http'
 
 // graphql.js JavaScript schema objects
