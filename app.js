@@ -2,11 +2,11 @@ import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import http from 'http'
 import { buildSchema } from 'graphql'
-import { find, filter } from 'lodash';
-import { makeExecutableSchema } from 'graphql-tools';
+import { find, filter } from 'lodash'
+import { makeExecutableSchema } from 'graphql-tools'
 
 // init express app and http server
-var app = express();
+var app = express()
 const server = http.createServer(app)
 
 // Get our mock data
