@@ -48,6 +48,6 @@ const resolvers = {
         }
       }
   },
-};
+}
 
 export { resolvers }

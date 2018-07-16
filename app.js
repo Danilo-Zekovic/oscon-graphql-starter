@@ -1,8 +1,8 @@
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import { buildSchema } from 'graphql'
-import { find, filter } from 'lodash';
-import { makeExecutableSchema } from 'graphql-tools';
+import { find, filter } from 'lodash'
+import { makeExecutableSchema } from 'graphql-tools'
 import http from 'http'
 
 // init express app and http server
@@ -85,12 +85,12 @@ const typeDefs =
 export const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
-});
+})
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true,
-}));
+}))
 
 server.listen(4000);
 console.log(
