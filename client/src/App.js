@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import logo from './../graphql.png';
+import logo from './graphql.png';
 import './App.css';
+import Posts from './components/Posts'
+import AddPost from './components/AddPost'
 
 class App extends Component {
   render() {
@@ -10,9 +12,10 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to Fundamentals of GraphQL</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code>.
-        </p>
+
+        <AddPost/>
+        <Posts/>
+
       </div>
     );
   }

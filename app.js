@@ -4,6 +4,7 @@ import { buildSchema, execute, subscribe } from 'graphql'
 import { find, filter } from 'lodash';
 import { makeExecutableSchema } from 'graphql-tools'
 import { createServer } from 'http'
+import cors from 'cors'
 
 // These imports support the subscription functionality
 import { graphiqlExpress } from 'graphql-server-express'
@@ -14,7 +15,8 @@ const PORT = 4000
 
 // init express app and http server
 var app = express()
-
+/* because our front end runns on diferet origin we need to enable cors */
+app.use(cors()) // not having cors enabled will cause an access control error
 
 // Bring in our mock data
 import { agents, authors, posts } from "./data"
