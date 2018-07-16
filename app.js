@@ -36,6 +36,7 @@ const typeDefs =
     posts: [Post]
     authors: [Author]
     author(id: Int!): Author
+    post(id: Int!): Post
   }
 `;
 
