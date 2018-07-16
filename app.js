@@ -65,9 +65,9 @@ const PostType = new GraphQLObjectType({
                 return root.title
                 }
               },
-    authorId: { type: new GraphQLNonNull(GraphQLInt),
+    author: { type: AuthorType,
                resolve: (root, args, context, info) => {
-                 return root.authorId
+                 return find(authors, {id: root.author})
                 }
               },
     articleType: { type: PostTypeEnum,
