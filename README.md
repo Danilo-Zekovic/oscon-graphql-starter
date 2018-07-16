@@ -1,11 +1,19 @@
 # oscon-graphql-starter
 Code for the OSCON 2018 Fundamentals Of GraphQL tutorial
 
-# Subscriptions branch  
+# Client branch  
 
-Demonstrate the graphQL subscription model 
+Demonstrate the graphQL and Apollo Client
 
 ## Running the app
 
 ```npm install```    
-```npm start```
+```npm start```   
+
+Then:   
+
+```cd client```   
+```npm install```   
+```npm start```   
+
+```localhost:3000```   
