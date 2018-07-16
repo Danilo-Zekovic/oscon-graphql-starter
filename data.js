@@ -1,9 +1,9 @@
-import { find } from "lodash"
+import { find, filter } from "lodash"
 
 // "Mock" database is simply programmer-deined data ====
 const agents = [
-  { id: 1, firstName: 'Larry', middleInitial: 'L', lastName: 'Thomas'},
-  { id: 2, firstName: 'Bill', middleInitial: 'R', lastName: 'Lewis' }
+  { id: 1, firstName: 'Larry', middleInitial: 'L', lastName: 'Thomas', represents: {authors} },
+  { id: 2, firstName: 'Bill', middleInitial: 'R', lastName: 'Lewis', represents: filter(authors, function(a) { return a.agent["id"] == 2}) }
 ]
 
 const authors = [

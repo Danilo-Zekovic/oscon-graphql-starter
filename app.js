@@ -41,7 +41,6 @@ const typeDefs =
     firstName: String
     middleInitial: String
     lastName: String
-    # Field unique to this implemented type
     represents: [Author]
   }
 
