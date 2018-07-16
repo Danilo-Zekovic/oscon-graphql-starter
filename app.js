@@ -38,19 +38,19 @@ const typeDefs =
     author(id: Int!): Author
     post(id: Int!): Post
   }
-`;
+`
 
 // Compile schema
 export const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
-});
+})
 
 // Provide a graphQL-only endpoint
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true,
-}));
+}))
 
 server.listen(4000);
 console.log(
