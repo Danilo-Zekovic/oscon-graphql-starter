@@ -67,6 +67,7 @@ const PostType = new GraphQLObjectType({
               },
     author: { type: AuthorType,
                resolve: (root, args, context, info) => {
+                 console.log('Oh oh: ' + JSON.stringify(root))
                  return find(authors, {id: root.author})
                 }
               },
