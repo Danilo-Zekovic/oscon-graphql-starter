@@ -9,7 +9,7 @@ const resolvers = {
     post: (_, args) => find(posts, { id: args.id})
   },
   Author: {
-    posts: (author) => filter(posts, { authorId: author.id }),
+    posts: (author) => filter(posts, { author: author }),
   },
 
 }
