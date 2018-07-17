@@ -1,9 +1,7 @@
 {
   posts {
     title
-    author {
-      lastName
-    }
+    authorId
   }
 }
 
