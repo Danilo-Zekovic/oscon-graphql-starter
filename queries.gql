@@ -12,3 +12,17 @@ Variables for above:
 {
   "id": 4
 }
+
+--------------------------------------
+
+{
+  people {
+    ...name
+  }
+}
+
+fragment name on Person {
+  firstName
+  middleInitial
+  lastName
+}
