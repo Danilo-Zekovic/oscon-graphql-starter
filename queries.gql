@@ -1,5 +1,3 @@
-k[bi']
-
 query showParam($id: Int!) {
   post(id: $id) {
     id
