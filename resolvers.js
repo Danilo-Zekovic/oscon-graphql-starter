@@ -13,9 +13,6 @@ const resolvers = {
   Author: {
     posts: (author) => filter(posts, { authorId: author.id }),
   },
-  Post: {
-    author: (post) => find(authors, { id: post.authorId }),
-  },
   Agent: {
     represents: (agent) => filter(authors, { agent: agent})
   },
