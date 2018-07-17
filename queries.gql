@@ -22,3 +22,13 @@
   }
 
   ------------------------------------------
+  subscription {
+    postAdded {
+      id
+      title
+      author {
+        lastName
+      }
+    }
+  }
+  
