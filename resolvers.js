@@ -29,14 +29,11 @@ const resolvers = {
       // Extract values from input data
       let thisTitle = input["title"]
       let thisArticleType = input["articleType"]
-      let thisAuthor = input["authorId"]
+      let thisAuthor = find(authors, { id: input["authorId"] } )
 
-      let newPost = {id: id, title: thisTitle, authorId: thisAuthor, articleType: thisArticleType}
+      let newPost = {id: id, title: thisTitle, author: thisAuthor, articleType: thisArticleType}
       posts.push(newPost)
-      // Notify subscribers
-      pubsub.publish(POST_ADDED_TOPIC, { postAdded: newPost });  // publish to a topic
       return newPost
-      },
     },
 
   Subscription: {
