@@ -27,3 +27,31 @@
     middleInitial
     lastName
   }
+
+  {
+  people {
+    ... on Author {
+      ...name
+      agent @include(if: $withAgent) {
+        ...name
+      }
+    }
+    ... on Agent {
+      ...name
+      represents @include(if: $withClient) {
+        ...name
+      }
+      }
+    }
+  }
+
+  fragment name on Person {
+    firstName
+    middleInitial
+    lastName
+  }
+
+  {
+  "withAgent": false,
+  "withClient": false
+}
