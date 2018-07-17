@@ -1,0 +1,24 @@
+{
+  people {
+    ... on Author {
+      ...name
+      agent {
+        ...name
+      }
+    }
+    ... on Agent {
+      ...name
+      represents {
+        ...name
+        }
+      }
+    }
+  }
+
+  fragment name on Person {
+    firstName
+    middleInitial
+    lastName
+  }
+
+  
