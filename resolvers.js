@@ -35,6 +35,7 @@ const resolvers = {
       posts.push(newPost)
       return newPost
     },
+  },
 
   Subscription: {
     postAdded: {
