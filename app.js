@@ -51,6 +51,7 @@ const PostTypeEnum = new GraphQLEnumType({
   }
 })
 
+// Note because of circular reference, there is a "thunk" in this def
 const PostType = new GraphQLObjectType({
   name: 'Post',
   description: 'A single post by a single author',
