@@ -4,7 +4,7 @@
     articleType
   }
 }
-
+------------------------
 {
   authors {
     ...name
@@ -16,7 +16,7 @@ fragment name on Author {
   middleInitial
   lastName
 }
-
+----------------------------
 {
   posts {
     title
