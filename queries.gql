@@ -31,3 +31,23 @@ fragment name on Author {
   middleInitial
   lastName
 }
+
+{
+  posts {
+		...details
+    }
+  }
+
+
+fragment details on Post {
+  title
+  author {
+    ...name
+  }
+}
+
+fragment name on Author {
+  lastName
+  middleInitial
+  firstName
+}
