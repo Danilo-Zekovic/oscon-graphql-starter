@@ -12,7 +12,7 @@ const resolvers = {
     post: (_, args) => find(posts, { id: args.id })
   },
   Author: {
-    posts: (author) => filter(posts, { author: { author } }),
+    posts: (author) => filter(posts, { author: author }),
   },
   Agent: {
     represents: (agent) => filter(authors, { agent: agent})
