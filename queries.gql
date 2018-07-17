@@ -28,28 +28,35 @@
     lastName
   }
 ----------------------------------------------------------
-  {
-  people {
-    ... on Author {
-      ...name
-      agent @include(if: $withAgent) {
-        ...name
-      }
-    }
-    ... on Agent {
-      ...name
-      represents @include(if: $withClient) {
-        ...name
-      }
-      }
+query showDirective($withAgent:Boolean!, $withClient: Boolean!){
+people {
+  ... on Author {
+    ...name
+    agent @include(if: $withAgent) {
+      ...agentName
     }
   }
+  ... on Agent {
+    ...agentName
+    represents @include(if: $withClient) {
+      ...name
+    }
+    }
+  }
+}
 
-  fragment name on Person {
-    firstName
-    middleInitial
-    lastName
-  }
+fragment name on Author {
+  firstName
+  middleInitial
+  lastName
+}
+
+fragment agentName on Agent {
+  firstName
+  middleInitial
+  lastName
+}
+-----------------------------------------------
 
   {
   "withAgent": false,
