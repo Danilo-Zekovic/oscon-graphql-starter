@@ -1,9 +1,9 @@
-import { find } from "lodash"
+import { find, filter } from "lodash"
 
 // "Mock" database is simply programmer-deined data ====
 const agents = [
-  { id: 1, firstName: 'Larry', middleInitial: 'L', lastName: 'Thomas' },
-  { id: 2, firstName: 'Bill', middleInitial: 'R', lastName: 'Lewis'}
+  { id: 1, firstName: 'Larry', middleInitial: 'L', lastName: 'Thomas'},
+  { id: 2, firstName: 'Bill', middleInitial: 'R', lastName: 'Lewis' }
 ]
 
 const authors = [
@@ -13,10 +13,10 @@ const authors = [
 ];
 
 const posts = [
-  { id: 1, authorId: 1, title: 'Introduction to GraphQL',articleType: 'REVIEW' },
-  { id: 2, authorId: 2, title: 'GraphQL Rocks', articleType:  'OPINION' },
-  { id: 3, authorId: 2, title: 'Advanced GraphQL', articleType: 'TECHNICAL' },
-  { id: 4, authorId: 3, title: 'Launchpad is Cool', articleType: 'OPINION' },
-];
+  { id: 1, author: find(authors, { id: 1 }), title: 'Introduction to GraphQL',articleType: 'REVIEW' },
+  { id: 2, author: find(authors, { id: 2 }), title: 'GraphQL Rocks', articleType:  'OPINION' },
+  { id: 3, author: find(authors, { id: 2 }), title: 'Advanced GraphQL', articleType: 'TECHNICAL' },
+  { id: 4, author: find(authors, { id: 3 }), title: 'Launchpad is Cool', articleType: 'OPINION' },
+]
 
 export { agents, authors, posts }
