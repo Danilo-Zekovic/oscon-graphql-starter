@@ -1,4 +1,4 @@
-import { find } from 'lodash'
+import { find, filter } from 'lodash'
 import { authors, posts, agents } from './data'
 
 // For subscription processing
@@ -46,7 +46,7 @@ const resolvers = {
   },
 
   Author: {
-    posts: (author) => filter(posts, { authorId: author.id }),
+    posts: (author) => filter(posts, { author: author }),
   },
   Post: {
     author: (post) => find(authors, { id: post.authorId }),
