@@ -1,4 +1,5 @@
 import { find, filter } from 'lodash'
+import { subscribe } from "graphql"
 import { authors, posts, agents } from './data'
 
 // For subscription processing
@@ -33,6 +34,8 @@ const resolvers = {
 
       let newPost = {id: id, title: thisTitle, author: thisAuthor, articleType: thisArticleType}
       posts.push(newPost)
+      // Notify subscribers
+      pubsub.publish(POST_ADDED_TOPIC, { postAdded: newPost });  // publish to a topic
       return newPost
     },
   },
