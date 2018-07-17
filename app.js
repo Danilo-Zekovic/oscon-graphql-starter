@@ -27,8 +27,8 @@ const typeDefs =
 
   type Post {
     id: ID!
-    title: String
-    author: Author
+    title: String!
+    authorId: Int!
     articleType: String
   }
 
