@@ -10,10 +10,7 @@ const resolvers = {
   },
   Author: {
     posts: (author) => filter(posts, { authorId: author.id }),
-  },
-  Post: {
-    author: (post) => find(authors, { id: post.authorId }),
-  },
+  }
 }
 
 export { resolvers }
