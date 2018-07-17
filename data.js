@@ -1,4 +1,4 @@
-import { find, filter } from "lodash"
+import { find } from "lodash"
 
 // "Mock" database is simply programmer-deined data ====
 const agents = [
