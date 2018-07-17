@@ -1,0 +1,33 @@
+{
+  posts {
+    title
+    articleType
+  }
+}
+
+{
+  authors {
+    ...name
+  }
+}
+
+fragment name on Author {
+  firstName
+  middleInitial
+  lastName
+}
+
+{
+  posts {
+    title
+    author {
+      ...name
+    }
+  }
+}
+
+fragment name on Author {
+  firstName
+  middleInitial
+  lastName
+}
