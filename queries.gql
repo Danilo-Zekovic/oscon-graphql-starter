@@ -1,0 +1,16 @@
+k[bi']
+
+query showParam($id: Int!) {
+  post(id: $id) {
+    id
+    title
+    author {
+      lastName
+    }
+  }
+}
+
+Variables for above:
+{
+  "id": 4
+}

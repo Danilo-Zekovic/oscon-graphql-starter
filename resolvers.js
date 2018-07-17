@@ -9,12 +9,10 @@ const resolvers = {
     people: () => authors.concat(agents),
     agent: (_, args) => find(agents,{ id: args.id }),
     author: (_, args) => find(authors, { id: args.id }),
+    post: (_, args) => find(posts, { id: args.id })
   },
   Author: {
-    posts: (author) => filter(posts, { authorId: author.id }),
-  },
-  Post: {
-    author: (post) => find(authors, { id: post.authorId }),
+    posts: (author) => filter(posts, { author: { author } }),
   },
   Agent: {
     represents: (agent) => filter(authors, { agent: agent})

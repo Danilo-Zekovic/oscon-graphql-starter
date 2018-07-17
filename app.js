@@ -68,6 +68,7 @@ const typeDefs =
     people: [Person]
     author(id: Int!): Author
     agent(id: Int!): Agent
+    post(id: Int!): Post
   }
 `;
 
