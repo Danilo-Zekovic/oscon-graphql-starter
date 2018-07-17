@@ -1,6 +1,5 @@
 import { find } from "lodash"
 
-// "Mock" database is simply programmer-deined data ====
 const agents = [
   { id: 1, firstName: 'Larry', middleInitial: 'L', lastName: 'Thomas'},
   { id: 2, firstName: 'Bill', middleInitial: 'R', lastName: 'Lewis' }
