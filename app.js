@@ -54,7 +54,7 @@ const PostTypeEnum = new GraphQLEnumType({
 const PostType = new GraphQLObjectType({
   name: 'Post',
   description: 'A single post by a single author',
-  fields: {
+  fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLID),
           resolve: (root, args, context, info) => {
             return root.id
@@ -65,15 +65,16 @@ const PostType = new GraphQLObjectType({
                 return root.title
                 }
               },
-    authorId: { type: GraphQLNonNull(GraphQLInt),
+    author: { type: new GraphQLNonNull(AuthorType),
                resolve: (root, args, context, info) => {
-                 return root.authorId
+                 console.log('Root: ' + JSON.stringify(root))
+                 return root.author
                 }
               },
     articleType: { type: PostTypeEnum,
                   // No resolver!!!  It's automatic!!
                   }
-          }
+          })
   })
 
   const AuthorType = new GraphQLObjectType({
